@@ -1,3 +1,4 @@
+from instructions import OPCODE_TABLE
 class CPU:
     def __init__(self, ram):
         self.ram = ram
@@ -12,9 +13,12 @@ class CPU:
         self.sp = 0xFD
         self.status = 0x00
  
-
     def step(self):
-        pass
+        opcode = self.fetch_byte()
+        if opcode in OPCODE_TABLE:
+            OPCODE_TABLE[opcode](self)
+        else:
+            raise Exception(f"Opcode {opcode:#04x} not found")
 
     def fetch_byte(self): # fetches next byte at PC
         value = self.ram.read(self.pc)
