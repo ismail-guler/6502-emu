@@ -20,3 +20,8 @@ class CPU:
         value = self.ram.read(self.pc)
         self.pc += 1
         return value
+
+    def fetch_word(self):
+        low = self.fetch_byte() # low byte
+        high = self.fetch_byte() # high byte
+        return high << 8 | low # shift high 8 bits, then add 'low' to lower bits with 'or' operation.
