@@ -15,3 +15,8 @@ class CPU:
 
     def step(self):
         pass
+
+    def fetch_byte(self): # fetches next byte at PC
+        value = self.ram.read(self.pc)
+        self.pc += 1
+        return value
